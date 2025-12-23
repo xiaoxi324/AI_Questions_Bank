@@ -1,0 +1,117 @@
+/* ==================== 知识库专用样式 (V5.3 紧凑极简版) ==================== */
+
+/* 1. 筛选栏 (保持不变) */
+.filter-bar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    background: #fff; /* 改为白色，更干净 */
+    padding: 10px 0; /* 减少左右padding，靠齐 */
+    border: none; /* 去掉边框 */
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+@media (max-width: 1400px) { .filter-bar { grid-template-columns: repeat(3, 1fr); } }
+
+.filter-item { display: flex; flex-direction: column; gap: 2px; }
+.filter-label { font-size: 11px; font-weight: bold; color: #999; }
+.filter-input { width: 100%; padding: 4px 6px; border: 1px solid #ddd; border-radius: 2px; font-size: 12px; }
+
+/* 2. 表格列宽 (保持 2:7:1) */
+.kb-col-path { width: 20%; vertical-align: top; padding-top: 8px; }
+.kb-col-content { width: 70%; vertical-align: top; padding-top: 8px; }
+.kb-col-action { width: 10%; text-align: left; vertical-align: middle; white-space: nowrap; }
+
+/* 路径样式 (更紧凑) */
+.path-box { display: flex; flex-direction: column; gap: 0px; }
+.path-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; font-size: 11px; }
+.path-line.source { font-weight: 600; color: #333; }
+.path-line.hierarchy { color: #999; }
+.path-line.target { color: #1890ff; }
+
+/* 内容样式 (更紧凑) */
+.content-cell-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.4; /* 行高减小 */
+    max-height: 4.2em;
+    font-size: 12px;
+    color: #333;
+}
+
+/* ==================== 3. 弹窗专用布局 (核心修改：高密度) ==================== */
+
+/* 弹窗滚动区背景变白 */
+.modal-scroll-area-white {
+    background: #fff; /* 纯白背景 */
+    padding: 15px 20px !important; /* 减小内边距 */
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 网格布局：更紧凑 */
+.kb-unique-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px; /* 间距从 20px 减到 10px */
+    margin-bottom: 10px;
+}
+
+/* 输入项容器 */
+.kb-unique-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* 标签和输入框紧贴 */
+    width: 100%;
+}
+
+/* 标签：更小更淡 */
+.kb-unique-item label {
+    font-weight: bold;
+    font-size: 11px;
+    color: #999;
+    margin-left: 2px;
+}
+
+/* 输入框：下划线风格，去背景 */
+.kb-input-compact {
+    width: 100%;
+    padding: 4px 0; /* 极小内边距 */
+    border: none;
+    border-bottom: 1px solid #ddd; /* 只有下边框 */
+    border-radius: 0;
+    font-size: 13px;
+    color: #333;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.kb-input-compact:focus {
+    border-bottom-color: #1890ff;
+    outline: none;
+}
+
+/* 大文本框：无边框，沉浸式 */
+.kb-textarea-compact {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #eee; /* 极淡边框 */
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #333;
+    resize: none;
+    background: #fafafa; /* 微灰背景区分 */
+    font-family: inherit;
+}
+
+.kb-textarea-compact:focus {
+    background: #fff;
+    border-color: #1890ff;
+    outline: none;
+}

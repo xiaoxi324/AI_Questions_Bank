@@ -1,0 +1,107 @@
+RealProject/                                        # H:\pycharm\RealProject
+    main.py                                         # 核心逻辑，前后端组装
+    config.py                                       # 项目配置，包含路径配置、模型API/KEY配置
+    backend/
+        books/
+            tools_import_step1_split.py             # 将书本按照段落切成分段后，存入SQL
+            tools_import_step2_process.py           # 把固定分段数依次发给AI,让AI转写成片段，存入SQL，使用本地模型(qwen3-14b-Q8)
+            tools_import_step3_embed.py             # 把人工确认过的片段，向量化后存入指定集合，使用本地模型(text-embedding-qwen3-8b-Q8)
+        dingchun/
+            dingchun.py                             # 定春的核心使用方法，调度本地和KIMI两个核心
+            call_other_ai                           # 直接调用qwen、kimi、doubao审题，作为RAG工具的辅助
+            dingchun_core_local.py                  # 定春的langchian框架agent的核心用法，使用本地模型(qwen3-14b-Q8)
+            dingchun_core_kimi.py                   # 定春的KIMI核心functioncall写法，使用线上模型kimi-k2-0905-preview
+            dingchun_tool_RAG.py                    # 定春的向量数据库检索工具，复用了search_rool中的工具
+            batch_review.py                         # 批量审题功能
+        knowledge/
+            knowledge_audit.py                      # 从SQL读取AI写好的片段，人工进行修改和确认
+            knowledge_import_db.py                  # 书本分段、片段的核心管理
+            knowledge_tool.py                       # 向量知识库(chroma)的增删改查
+        question_agent/
+            a_question_tool.py                      # 编题agent工具，包含检索案例、检索知识库两个工具
+            b_question_agent.py                     # agent_1，编写题干和正确选项的agent，可以根据需求检索案例和知识库
+            c_distraction_agent.py                  # agent_2，编写干扰项的agent，只能检索知识库
+            d_final_agent.py                        # agent_3，审题agent，后期技术上是希望直接使用dingchun来审题，当前正在调试阶段
+            z_common.py                             # 三个agent的编排
+        routers/                                    # 分模块注册接口
+            api_AI_search.py
+            api_batch_review.py
+            api_common.py
+            api_config.py
+            api_dingchun.py
+            api_import_books.py
+            api_question_agent.py
+            api_search.py
+            api_sql.py
+        search/
+            AI_search.py                            # 智能对比agent，支持导入数据，按照分段进行检索，按照语义判断检索内容是否正确
+            level_lookup.py                         # 支持按照元数据过滤，元数据支持1-8层级
+            search_tool.py                          # 搜索的底层工具
+        test/                                       # 一些测试方法
+        tools/
+            global_context.py                       # 全局上下文，用于将agent思考过程直接推到前端
+            othertools_update_db.py                 # 数据库更新相关的辅助工具
+            tools_call_ai.py                        # 调用 AI 能力的工具类，将LMstudio调用AI的能力封装，作为底层工具
+            tools_sql_connect.py                    # SQL 数据库连接的工具类，将SQL的增删改查能力封装，作为底层工具
+            tools_structure.py                      # 只能识别各种格式的题目，并格式化入库的工具，使用本地模型(qwen3-vl-4b-thinking)
+
+    frontend/
+        index.html                                  # 主要页面,侧边栏结构，其他页面以页签形式挂载
+        pages/                                      # 页面框架
+            add.html
+            AI_search.html
+            audit.html
+            batch_review.html
+            config.html
+            import_books.html
+            knowledge.html
+            library.html
+            make_question.html
+            messages.html
+            tool.html
+        js/                                         # 前端交互方法
+            core.js                                 # 公共、核心模块
+            add.js
+            AI_search.js
+            audit.js
+            batch_review.js
+            config.js
+            import_books.js
+            knowledge.js
+            library.js
+            make_question.js
+            messages.js
+            tool.js
+        css/                                        # 前端样式
+            add.css
+            batch_review.css
+            common.css
+            config.css
+            import_books.css
+            knowledge.css
+            library.css
+            make_question.css
+            tool.css
+
+    dbtools/                                        # 非平台使用，数据准确阶段的一些工具，全部使用本地脚本和模型
+        db_Case_Question.py                         # 向量化案例工具
+        db_embed.py                                 # 向量化工具
+        db_json_total.py                            # 查看json中片段文字统计(检查数据库质量)
+        db_split_medic.py                           # 按照级标切分工具
+        db_test.py                                  # 向量数据库测试工具
+        db_view.py                                  # 向量数据库预览工具
+        db_view_books.py                            # 向量数据库查看来源书本工具
+
+    resource/                                       # 资源文件夹
+    requirements.txt                                # 依赖管理
+    natapp/                                         # 隧道穿透工具(个人免费隧道，三天换一次域名)
+    Z_DOC/
+        software_architecture.txt                   # 记录软件的架构，即本文件
+        doc_sql.txt                                 # 记录数据库的结构，可运行tools_sql_connect.py得到
+
+
+
+
+
+
+

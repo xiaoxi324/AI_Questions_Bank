@@ -1,0 +1,189 @@
+/* ==================== 药典查询工具专用样式 ==================== */
+
+/* 1. 顶部搜索区 */
+.search-hero {
+    text-align: center;
+    padding: 30px 0;
+    flex-shrink: 0; /* 防止被压缩 */
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.search-box-lg {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.search-box-lg input {
+    width: 500px;           /* 搜索框更宽 */
+    padding: 12px 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-box-lg input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.search-tips {
+    font-size: 12px;
+    color: #999;
+}
+
+.search-tips span {
+    color: var(--primary);
+    cursor: pointer;
+    margin: 0 5px;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.search-tips span:hover {
+    color: #40a9ff;
+}
+
+/* 2. 结果展示容器 */
+.result-area-grid {
+    flex: 1;
+    overflow-y: auto;       /* 开启垂直滚动 */
+    padding: 15px;
+    background: #f0f2f5;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    /* 关键：计算高度，确保滚动条出现在区域内而不是整个页面 */
+    height: calc(100vh - 260px);
+}
+
+/* 结果列表 (单列布局) */
+.rag-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 3. 结果卡片样式 */
+.rag-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.rag-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: #bda0e6; /* 悬停时微变色 */
+    transform: translateY(-1px);
+}
+
+/* 卡片头部 */
+.rag-header {
+    background: #f9fafc;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between; /* 左右对齐 */
+    align-items: flex-start;
+}
+
+.rag-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rag-score {
+    font-weight: bold;
+    color: var(--primary);
+    background: #e6f7ff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    margin-right: 8px;
+}
+
+.rag-source-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 13px;
+}
+
+.rag-path {
+    font-family: monospace; /* 等宽字体显示路径 */
+    color: #888;
+    font-size: 11px;
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* 卡片内容区 */
+.rag-body {
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap; /* 保留换行符 */
+    word-break: break-all;
+}
+
+/* 4. 编辑模式样式 */
+.rag-edit-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid var(--primary); /* 编辑时边框变蓝 */
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    resize: vertical;
+    outline: none;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+/* 按钮微调 */
+.rag-actions button {
+    opacity: 0.8;
+}
+.rag-actions button:hover {
+    opacity: 1;
+}
+
+/* 5. 状态提示 */
+.loading-text {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 14px;
+}
+
+.empty-state {
+    text-align: center;
+    color: #bbb;
+    padding: 40px;
+    font-size: 14px;
+    border: 2px dashed #eee;
+    border-radius: 8px;
+}
+
+.error-state {
+    text-align: center;
+    color: var(--danger);
+    padding: 20px;
+    background: #fff1f0;
+    border-radius: 4px;
+    border: 1px solid #ffa39e;
+}

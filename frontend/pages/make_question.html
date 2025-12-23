@@ -1,0 +1,85 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <h3 style="margin:0; font-size:18px; font-weight:bold; color:#333;">💡 智能编题</h3>
+        </div>
+    </div>
+
+    <div class="config-container">
+        <div class="grid-layout">
+
+            <div class="card-box area-input">
+                <div class="card-header">1. 📝 编题参数设置</div>
+
+                <div class="card-content scroll-box input-form">
+
+                    <div class="form-group">
+                        <label>考点 (Topic):</label>
+                        <input type="text" id="topic" placeholder="例如：地西泮 中毒" value="地西泮 中毒">
+                    </div>
+
+                    <div class="form-group">
+                        <label>案例 (Case):</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="has_case" value="true" checked> 生成案例</label>
+                            <label><input type="radio" name="has_case" value="false"> 无案例</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                            <label>正确项数:</label>
+                            <input type="number" id="correct_count" class="input-full" value="1" min="1">
+                        </div>
+                        <div class="col">
+                            <label>总选项数:</label>
+                            <input type="number" id="total_count" class="input-full" value="5" min="2">
+                        </div>
+                        <div class="col">
+                            <label>生成题数:</label>
+                            <input type="number" id="question_count" class="input-full" value="1" min="1" max="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer-fixed">
+                    <button class="btn-start full-width" id="start_btn" onclick="startGeneration()">开始编题</button>
+                </div>
+            </div>
+
+            <div class="card-box area-log">
+                <div class="card-header">2. 🤖 Agent 回复区域 (Think Process)</div>
+                <div class="card-content scroll-box" id="agent_log_area">
+                    <span style="color:#999">等待任务启动...</span>
+                </div>
+            </div>
+
+            <div class="card-box area-result">
+                <div class="card-header">
+                    3. 💾 最终结果 (待入库)
+                    <span id="status_tag" style="float:right; font-size:12px; font-weight:normal;"></span>
+                </div>
+
+                <div class="card-content scroll-box" id="final_result_area">
+                    <div id="result_placeholder" style="color:#999; text-align:center; margin-top:20px;">
+                        题目生成后将在此显示...
+                    </div>
+
+                    <div id="final_content" style="display:none;"></div>
+                </div>
+
+                <div class="card-footer-fixed action-bar" id="result_footer" style="display:none;">
+                    <button class="btn-sub btn-retry" id="retry_btn" onclick="startGeneration()" style="width: 100%">🔄 重新出题</button>
+                    </div>
+            </div>
+
+            <div class="card-box area-snippet">
+                <div class="card-header">4. 📖 参考片段区域 (RAG Context)</div>
+                <div class="card-content scroll-box" id="snippet_area">
+                    <span style="color:#999">工具调用的检索结果将显示在这里...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

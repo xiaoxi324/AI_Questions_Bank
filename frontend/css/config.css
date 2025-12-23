@@ -1,0 +1,172 @@
+/* ==================== config.css ==================== */
+
+/* 1. 主容器：占满剩余高度，防止页面出现双重滚动条 */
+.config-container {
+    padding: 20px;
+    width: 100%;
+    height: calc(100vh - 60px); /* 减去顶部导航高度 */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 2. 卡片主体：Flex 布局，确保底部按钮能固定 */
+.config-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+
+    /* 撑满容器高度 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 内部滚动，外部不动 */
+}
+
+/* 3. 头部区域 (固定) */
+.config-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+    background: #fafafa;
+    flex-shrink: 0;
+}
+
+.config-header h4 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.config-desc {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+
+/* 4. 中间内容区域 (可滚动) */
+.config-body {
+    padding: 20px;
+    flex: 1;            /* 占据剩余空间 */
+    overflow-y: auto;   /* 内容溢出时滚动 */
+    background-color: #f7f9fa; /* 给背景稍微灰一点，突出白色卡片 */
+}
+
+/* === 核心布局：两列网格 === */
+.collection-list-container {
+    display: grid;
+    /* 强制两列，每列占 50% */
+    grid-template-columns: 1fr 1fr;
+    /* 卡片间距 */
+    gap: 20px;
+    /* 底部留白，防止滚动到底部时被遮挡 */
+    padding-bottom: 20px;
+}
+
+/* 响应式：只有在极窄屏幕(手机)下才变单列，普通窗口保持两列 */
+@media (max-width: 768px) {
+    .collection-list-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 5. 单个集合卡片 */
+.collection-item {
+    background-color: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+    /* 确保高度自适应，对齐美观 */
+    height: 100%;
+}
+
+.collection-item:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.15);
+}
+
+/* 卡片标题栏 */
+.collection-header-row {
+    padding: 15px;
+    border-bottom: 1px dashed #eee;
+    background: #fff;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.collection-header-row label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    margin: 0;
+}
+
+.collection-header-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.collection-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.total-badge {
+    margin-left: auto;
+    font-size: 12px;
+    color: #1890ff;
+    background: #e6f7ff;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* 书籍来源列表区域 */
+.source-list {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: flex-start; /* 内容靠上 */
+}
+
+.source-item {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.source-count {
+    margin-left: 6px;
+    font-weight: bold;
+    color: #888;
+}
+
+/* 6. 底部固定区域 */
+.config-footer {
+    padding: 15px 25px;
+    border-top: 1px solid #eee;
+    background: #fff;
+    text-align: right;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+/* 加载动画容器 */
+.loading-box {
+    text-align: center;
+    padding: 50px;
+    color: #999;
+}

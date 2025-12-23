@@ -1,0 +1,132 @@
+🔌 正在连接数据库: pharmacist_question_bank...
+✅ 连接成功！
+
+📊 当前库中的表:
+  1. batch_task_progress
+  2. book_segments
+  3. case_question
+  4. import_books
+  5. knowledge_fragments
+  6. pharmacist_questions
+  7. question_review_details
+  8. system_config
+  9. system_logs
+
+============================================================
+📋 表字段详情（字段名 | 类型 | 允许空 | 注释）
+============================================================
+
+【batch_task_progress】
+  question_id     | int        | NO    | 无
+  dingchun_status | varchar    | YES   | 无
+  qwen_status     | varchar    | YES   | 无
+  kimi_status     | varchar    | YES   | 无
+  doubao_status   | varchar    | YES   | 无
+  updated_at      | datetime   | YES   | 无
+
+【book_segments】
+  segment_id      | int        | NO    | 无
+  book_id         | int        | NO    | 无
+  book_name       | varchar    | YES   | 无
+  content         | longtext   | YES   | 分段原始内容
+  segment_order   | int        | YES   | 在书中的顺序索引
+  is_processed    | tinyint    | YES   | 是否已被AI处理: 0否 1是
+  create_time     | datetime   | YES   | 无
+
+【case_question】
+  question_id     | int        | NO    | 无
+  question_type   | varchar    | YES   | 无
+  case_content    | text       | YES   | 共用题干/案例背景
+  stem            | text       | NO    | 具体问题
+  option_a        | text       | YES   | 无
+  option_b        | text       | YES   | 无
+  option_c        | text       | YES   | 无
+  option_d        | text       | YES   | 无
+  option_e        | text       | YES   | 无
+  option_f        | text       | YES   | 无
+  option_g        | text       | YES   | 无
+  option_h        | text       | YES   | 无
+  option_i        | text       | YES   | 无
+  option_j        | text       | YES   | 无
+  option_k        | text       | YES   | 无
+  option_l        | text       | YES   | 无
+  answer          | text       | YES   | 无
+  analysis        | text       | YES   | 无
+  source          | varchar    | YES   | 原始题目ID
+  create_time     | timestamp  | YES   | 无
+
+【import_books】
+  book_id         | int        | NO    | 无
+  book_name       | varchar    | NO    | 书名
+  file_path       | varchar    | NO    | 本地绝对路径
+  target_collection | varchar    | YES   | 绑定集合名
+  total_segments  | int        | YES   | 总分段数(机械切分后)
+  processed_segments | int        | YES   | 已处理分段数(AI已读)
+  total_fragments | int        | YES   | AI生成的片段总数
+  imported_fragments | int        | YES   | 已成功存入向量库的片段数
+  batch_size      | int        | YES   | 一次给AI喂多少个分段
+  status          | varchar    | YES   | 状态: ready, processing, completed, error
+  create_time     | datetime   | YES   | 无
+
+【knowledge_fragments】
+  fragment_id     | int        | NO    | 无
+  book_id         | int        | NO    | 无
+  book_name       | varchar    | YES   | 无
+  source_segment_range | varchar    | YES   | 来源分段范围(如: 1-15)
+  content         | longtext   | YES   | 结构化后的内容
+  is_embedded     | tinyint    | YES   | 是否已加入向量数据库: 0否 1是
+  create_time     | datetime   | YES   | 无
+  L1              | varchar    | YES   | 无
+  L2              | varchar    | YES   | 无
+  L3              | varchar    | YES   | 无
+  L4              | varchar    | YES   | 无
+  L5              | varchar    | YES   | 无
+  L6              | varchar    | YES   | 无
+  L7              | varchar    | YES   | 无
+  L8              | varchar    | YES   | 无
+  combo_title     | varchar    | YES   | 无
+
+【pharmacist_questions】
+  question_id     | int        | NO    | 无
+  question_type   | varchar    | NO    | 无
+  case_content    | text       | YES   | 无
+  stem            | text       | NO    | 无
+  option_a        | varchar    | YES   | 无
+  option_b        | varchar    | YES   | 无
+  option_c        | varchar    | YES   | 无
+  option_d        | varchar    | YES   | 无
+  option_e        | varchar    | YES   | 无
+  option_f        | varchar    | YES   | 无
+  option_g        | varchar    | YES   | 无
+  option_h        | varchar    | YES   | 无
+  option_i        | varchar    | YES   | 无
+  option_j        | varchar    | YES   | 无
+  option_k        | varchar    | YES   | 无
+  option_l        | varchar    | YES   | 无
+  answer          | text       | NO    | 无
+  analysis        | text       | YES   | 无
+  source          | varchar    | YES   | 题目来源(手动录入/智能编题/智能解析)
+  create_time     | datetime   | NO    | 无
+
+【question_review_details】
+  review_id       | int        | NO    | 无
+  question_id     | int        | NO    | 无
+  rag_index       | text       | YES   | 无
+  ai_name         | varchar    | NO    | 无
+  review_result   | varchar    | NO    | 无
+  review_content  | text       | YES   | 无
+  review_time     | datetime   | NO    | 无
+
+【system_config】
+  config_key      | varchar    | NO    | 配置键名
+  config_value    | text       | YES   | 配置值(通常存JSON)
+  description     | varchar    | YES   | 描述
+  update_time     | datetime   | YES   | 无
+
+【system_logs】
+  log_id          | int        | NO    | 无
+  log_type        | varchar    | YES   | 无
+  source          | varchar    | YES   | 无
+  message         | text       | YES   | 无
+  is_read         | tinyint    | YES   | 无
+  create_time     | datetime   | YES   | 无

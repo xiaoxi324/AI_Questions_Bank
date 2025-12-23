@@ -1,0 +1,32 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <h3 style="margin:0; font-size:16px; font-weight:bold; color:#333;">⚙️ 系统配置</h3>
+        </div>
+    </div>
+
+    <div class="config-container">
+        <div class="config-card">
+
+            <div class="config-header">
+                <h4>📚 RAG 知识库检索范围</h4>
+                <p class="config-desc">
+                    设置“定春”在审题时，需要从哪些向量集合中查找依据（支持多选）。
+                </p>
+            </div>
+
+            <div class="config-body">
+                <div id="collection-loading" class="loading-box">
+                    <div class="spinner"></div>
+                    <span>正在读取数据库结构...</span>
+                </div>
+                <div id="collection-list" class="collection-list-container"></div>
+            </div>
+
+            <div class="config-footer">
+                <button class="btn btn-primary" onclick="saveSearchConfig()">保存配置</button>
+            </div>
+
+        </div>
+    </div>
+</div>

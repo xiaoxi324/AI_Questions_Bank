@@ -1,0 +1,20 @@
+一、全局基础层
+样式类型	具体样式	功能说明
+全局变量	:root 下的--sidebar-bg/--primary等 10 + 变量	定义全站颜色 / 主题变量，统一样式标准
+基础重置	*/body	重置盒模型、默认边距，定义全局字体 / 背景 / 字号，页面禁止滚动
+二、布局组件
+样式类型	具体样式	功能说明
+侧边栏	.sidebar/.logo-area/.menu/.menu-item/.version-info等	侧边栏整体布局（200px 宽、深色背景）、logo、菜单组 / 菜单项样式、版本信息
+主内容区	.main-content/.page-section	主内容区占满剩余宽度、内部 flex 布局、内边距 15px、禁止溢出
+工具栏	.toolbar/.toolbar-left/.search-input	工具栏白色背景、阴影、左右布局，搜索框样式
+三、通用 UI 组件
+样式类型	具体样式	功能说明
+表格	.table-container/.data-table/th/td	表格容器（白色背景、圆角、滚动）、表格自适应、表头吸顶、单元格省略号、行 hover 效果
+按钮	.btn/.btn-primary/.btn-default/.btn-link等 + 尺寸变体（sm/xs/lg）	按钮基础样式 + 不同类型（主按钮 / 默认 / 文字链接）+ 尺寸调整
+分页	.pagination/.page-info	分页栏右对齐、浅灰色文字提示
+表单	.form-input/.form-textarea/.form-group/.form-select	输入框 / 文本域 / 下拉框样式，表单组上下布局
+状态 / 加载	.status-dot（pass/fail/warn/loading/wait）/.status-cell/.loading-placeholder/.loading-spinner	状态点（8px 圆形）、加载动画（闪烁 / 转圈）、空状态 / 错误状态提示
+弹窗	.modal/.modal-content/.modal-header-bar/.modal-scroll-area/.modal-footer	全屏弹窗（半透明背景）、弹窗内容区（90vh 高、圆角）、头部 / 滚动区 / 底部按钮区样式
+四、动画 / 关键帧
+样式类型	具体样式	功能说明
+动画	@keyframes blink/spin/fadeIn	闪烁（loading 状态点）、转圈（加载动画）、渐入动画

@@ -1,0 +1,137 @@
+/* ==================== 题库详情弹窗 (V6.0 极简版) ==================== */
+
+/* 1. 题目详情容器：去框、去背景 */
+.question-detail-box {
+    background: transparent;
+    padding: 20px 30px 0 30px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* 2. 病例内容：极简风格 */
+#modal-case-content {
+    margin-bottom: 10px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    line-height: 1.6;
+    font-size: 14px;
+    color: #333;
+}
+#modal-case-content::before {
+    content: "【案例背景】";
+    font-weight: bold;
+    color: #1890ff;
+    margin-right: 5px;
+}
+#modal-case-content:empty { display: none; }
+
+/* 3. 题干与选项 */
+.q-stem {
+    font-size: 15px; font-weight: 600;
+    margin-bottom: 8px; color: #000; line-height: 1.5;
+}
+.q-options {
+    margin-bottom: 10px; line-height: 1.6;
+    color: #444; font-size: 14px; padding-left: 10px;
+}
+
+/* 4. 答案与解析 */
+.q-footer {
+    background: #fcfcfc;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    border: 1px dashed #eee;
+    color: #555;
+    margin-top: 5px;
+}
+.tag-answer {
+    color: #1890ff; font-weight: bold;
+    font-size: 14px; margin-right: 20px;
+    display: inline-block; margin-bottom: 5px;
+}
+.q-analysis { display: block; margin-top: 0; color: #666; line-height: 1.5; }
+
+/* 5. Tab 栏 */
+.modal-actions {
+    background: transparent;
+    padding: 0 30px;
+    margin-top: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex; justify-content: space-between; align-items: center;
+    height: 40px; flex-shrink: 0;
+}
+.ai-tabs-header { height: 100%; display: flex; }
+.tab-item {
+    padding: 0 20px;
+    font-size: 13px;
+    border-radius: 4px 4px 0 0;
+    margin-right: 2px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    cursor: pointer;
+    display: flex; align-items: center;
+    color: #666;
+}
+.tab-item:hover { background: #f5f5f5; }
+.tab-item.active {
+    background: #fff; color: #1890ff;
+    border-color: #eee; border-bottom-color: #fff;
+    font-weight: bold; position: relative; top: 1px;
+}
+
+/* 6. AI 结果区 */
+.modal-bottom {
+    background: #fff;
+    padding: 20px 30px;
+    margin: 0; border-radius: 0;
+    flex: 1; min-height: 0;
+}
+.tab-content { display: none; flex: 1; flex-direction: column; }
+.tab-content.active { display: flex; animation: fadeIn 0.2s; }
+
+/* AI 工具栏 */
+.ai-toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #fff; padding: 5px 0; border: none;
+    border-bottom: 1px solid #f0f0f0; margin-bottom: 10px;
+    flex-shrink: 0;
+}
+.status-group, .history-group { display: flex; align-items: center; gap: 8px; }
+.history-select { padding: 2px 5px; border: 1px solid #d9d9d9; border-radius: 3px; font-size: 11px; min-width: 180px; }
+.history-select:disabled { background: #f5f5f5; cursor: not-allowed; }
+
+/* RAG 引用 */
+.rag-box {
+    margin-top: 15px; padding: 10px;
+    background: #fafafa; border: 1px solid #eee; border-radius: 4px;
+}
+.rag-title { font-size: 12px; font-weight: bold; color: #999; margin-bottom: 5px; }
+.rag-content-full {
+    font-size: 12px; color: #555;
+    white-space: pre-wrap; word-break: break-all;
+    line-height: 1.5; padding: 0;
+    background: transparent; border: none;
+    max-height: none; overflow: visible;
+}
+.hidden { display: none; }
+
+.markdown-body { font-size: 14px; line-height: 1.6; color: #333; }
+.markdown-body p { margin-bottom: 6px; }
+
+/* 7. 柔和的日志框样式 (重要) */
+.log-container {
+    background: #f0f7ff; /* 浅蓝背景 */
+    color: #333;         /* 深色文字 */
+    padding: 15px;
+    border-radius: 6px;
+    font-family: 'Menlo', monospace;
+    font-size: 12px;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #bae7ff;
+    line-height: 1.5;
+}

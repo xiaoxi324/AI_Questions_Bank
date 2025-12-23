@@ -1,0 +1,72 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <h3 style="margin:0; font-size:16px; font-weight:bold; color:#333;">📚 书本管理 (智能录入)</h3>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn btn-primary" onclick="window.openBookModal()">+ 添加新书任务</button>
+        </div>
+    </div>
+
+    <div class="table-container" style="height: 55%; margin-bottom: 15px;">
+        <table class="data-table" style="table-layout: fixed; width: 100%;">
+            <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th width="100">书本名称</th>
+                    <th width="200">本地路径</th>
+
+                    <th>分段进度 (切分/AI)</th>
+                    <th>入库进度 (向量化)</th>
+
+                    <th width="100">集合</th>
+                    <th width="80">状态</th>
+                    <th width="280">操作</th>
+                </tr>
+            </thead>
+            <tbody id="book-list-body">
+                </tbody>
+        </table>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+        <div style="margin-bottom: 5px; font-size: 12px; font-weight: bold; color: #666;">📺 实时任务日志</div>
+        <div class="log-console" id="import-log-box">
+            <div class="log-line info">> 系统就绪...</div>
+        </div>
+    </div>
+
+    <div id="book-modal" class="modal hidden">
+        <div class="modal-content" style="width: 500px; height: auto; max-height: 85vh;">
+            <div class="modal-header-bar">
+                <h4 id="book-modal-title">编辑书本任务</h4>
+                <span class="close-icon" onclick="closeBookModal()">×</span>
+            </div>
+            <div class="modal-scroll-area" style="padding: 25px;">
+                <form id="book-form">
+                    <input type="hidden" id="book-id">
+                    <div class="form-group">
+                        <label>书本名称</label>
+                        <input type="text" id="book-name" class="form-input" placeholder="例如：药学综合知识">
+                    </div>
+                    <div class="form-group" style="margin-top:15px;">
+                        <label>本地文件绝对路径 (.docx)</label>
+                        <input type="text" id="book-path" class="form-input" placeholder="G:\Books\test.docx">
+                    </div>
+                    <div class="form-group" style="margin-top:15px;">
+                        <label>绑定集合名</label>
+                        <input type="text" id="book-collection" class="form-input" value="Pharmacopoeia">
+                    </div>
+                    <div class="form-group" style="margin-top:15px;">
+                        <label>一次处理的分段数量 (Batch Size)</label>
+                        <input type="number" id="book-batch" class="form-input" value="5">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" onclick="closeBookModal()">取消</button>
+                <button class="btn btn-primary" onclick="saveBook()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

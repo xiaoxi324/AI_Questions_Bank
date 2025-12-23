@@ -1,0 +1,59 @@
+<div id="page-AI_search" class="page-section">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <span style="font-weight:bold; font-size:18px; color:#333;">智能一致性对比</span>
+            <span style="font-size:12px; color:#999; margin-left:10px;">基于知识库对书本/文本进行核查与纠错</span>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 15px; flex: 1; height: 100%; overflow: hidden; min-height: 0;">
+
+        <div class="card" style="flex: 3.5; display: flex; flex-direction: column; background: #fff; border-radius: 4px; border: 1px solid #e8e8e8;">
+            <div class="card-header" style="padding: 10px 15px; border-bottom: 1px solid #eee; font-weight: 600; color: #555;">
+                待审核内容
+            </div>
+
+            <div style="flex: 1; padding: 10px;">
+                <textarea id="compare-input" class="form-textarea"
+                    style="width: 100%; height: 100%; border: none; outline: none; resize: none; font-size: 14px; line-height: 1.6;"
+                    placeholder="在此粘贴内容，或使用下方工具导入书本片段..."></textarea>
+            </div>
+
+            <div style="padding: 10px 15px; background: #fafafa; border-top: 1px solid #eee; display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <select id="compare-book-select" class="form-select" style="flex: 1;">
+                        <option value="">加载中...</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="number" id="compare-start-row" class="form-input" placeholder="始行" style="width: 70px;">
+                    <span style="color:#999">-</span>
+                    <input type="number" id="compare-end-row" class="form-input" placeholder="终行" style="width: 70px;">
+                    <button id="btn-import-book" class="btn btn-default btn-sm" style="flex: 1;" onclick="importBookContent()">
+                        📥 导入
+                    </button>
+                </div>
+                <button id="btn-start-analysis" class="btn btn-primary" style="width: 100%; margin-top: 5px;" onclick="startSmartAnalysis()">
+                    ⚡ 开始智能分析
+                </button>
+            </div>
+        </div>
+
+        <div class="card" style="flex: 6.5; display: flex; flex-direction: column; background: #fff; border-radius: 4px; border: 1px solid #e8e8e8;">
+            <div class="card-header" style="padding: 10px 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                <span style="font-weight: 600; color: #555;">分析报告</span>
+                <span id="analysis-status" style="font-size: 12px; color: #999;">等待开始</span>
+            </div>
+
+            <div id="compare-results-body" style="flex: 1; overflow-y: auto; padding: 15px; background: #fcfcfc;">
+                <div class="empty-state">
+                    <div style="margin-bottom: 10px;">
+                        <img src="/resource/analysis_empty.png"
+                             style="width: 40px; height: 40px; object-fit: contain;">
+                    </div>
+                    <div>点击左侧“开始智能分析”生成对比报告</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

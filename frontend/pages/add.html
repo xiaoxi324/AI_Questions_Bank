@@ -1,0 +1,28 @@
+<div class="page-section active">
+    <div class="add-page-header">
+        <h2>新增题目</h2>
+    </div>
+
+    <div class="panel-add">
+
+        <div class="panel-left">
+            <h3>文本录入</h3>
+            <textarea id="raw-input" placeholder="在此粘贴题目文本...(每题之间空一行)"></textarea>
+            <div class="action-bar">
+                <select id="source-select" class="form-select" style="width: 150px;">
+                    <option value="智能审题">来源: 智能审题</option>
+                    <option value="真题导入">来源: 真题导入</option>
+                    <option value="人工编辑">来源: 人工编辑</option>
+                </select>
+                <button class="btn btn-primary full-width" onclick="parseAndSubmit()">✨ 智能解析并入库</button>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <h3>处理日志</h3>
+            <div id="add-log-area" class="log-box">
+                <div class="log-item info">等待输入...</div>
+            </div>
+        </div>
+    </div>
+</div>

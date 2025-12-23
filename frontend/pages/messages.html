@@ -1,0 +1,25 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <h3 style="margin:0; font-size:16px; font-weight:bold; color:#333;">🔔 系统消息通知</h3>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn btn-outline" onclick="clearLogs()">🗑️ 清空日志</button>
+            <button class="btn btn-default" onclick="loadSystemLogs()">🔄 刷新</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th width="60">类型</th>
+                    <th width="150">来源 (任务ID)</th>
+                    <th>错误详情</th>
+                    <th width="150">时间</th>
+                </tr>
+            </thead>
+            <tbody id="msg-list-body"></tbody>
+        </table>
+    </div>
+</div>

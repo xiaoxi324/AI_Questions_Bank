@@ -1,0 +1,95 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <label style="font-size:12px;">集合：</label>
+            <select id="collection-select" class="form-select" onchange="loadMetadataConfig()">
+                <option value="">加载中...</option>
+            </select>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn btn-primary btn-sm" onclick="openKnowledgeModal()">+ 新增</button>
+        </div>
+    </div>
+
+    <div class="filter-bar" id="filter-container" style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <div class="loading-text">加载筛选...</div>
+    </div>
+
+    <div class="action-row" style="margin-bottom: 5px;">
+        <button class="btn btn-xs btn-default" onclick="resetFilters()">重置</button>
+        <button class="btn btn-xs btn-primary" onclick="loadKnowledgeList(1)">🔍 查询</button>
+    </div>
+
+    <div class="table-container" style="height: calc(100vh - 240px); overflow-y: auto;">
+        <table class="data-table" style="table-layout: fixed; width: 100%; border-collapse: collapse;">
+            <thead style="position: sticky; top: 0; background: #f5f5f5; z-index: 1;">
+                <tr>
+                    <th width="320">完整来源 (L1/L2 + 路径)</th>
+                    <th class="kb-col-content">内容</th>
+                    <th width="120" class="kb-col-action">操作</th>
+                </tr>
+            </thead>
+            <tbody id="knowledge-list-body">
+                </tbody>
+        </table>
+    </div>
+
+    <div class="pagination" style="padding: 5px 10px; min-height: 30px;">
+        <span id="kb-page-info" class="page-info" style="font-size: 11px;">Page 1</span>
+        <div class="page-btns">
+            <button class="btn btn-xs" onclick="changeKbPage(-1)"> < </button>
+            <button class="btn btn-xs" onclick="changeKbPage(1)"> > </button>
+        </div>
+    </div>
+
+    <div id="knowledge-modal" class="modal hidden">
+        <div class="modal-content" style="width: 95%; max-width: 1400px; height: 95vh;">
+            <div class="modal-header-bar" style="padding: 10px 20px; background: #fff;">
+                <h4 id="kb-modal-title" style="font-size: 14px;">编辑知识片段</h4>
+                <span class="close-icon" onclick="closeKbModal()">×</span>
+            </div>
+
+            <div class="modal-scroll-area-white" style="padding: 20px;">
+                <form id="kb-form" style="height: 100%; display: flex; flex-direction: column;">
+                    <input type="hidden" id="kb-id">
+
+                    <div class="kb-unique-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px;">
+                        <div class="kb-unique-item"><label>L1</label><input type="text" id="kb-L1" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L2</label><input type="text" id="kb-L2" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L3</label><input type="text" id="kb-L3" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L4</label><input type="text" id="kb-L4" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L5</label><input type="text" id="kb-L5" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L6</label><input type="text" id="kb-L6" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L7</label><input type="text" id="kb-L7" class="kb-input-compact"></div>
+                        <div class="kb-unique-item"><label>L8</label><input type="text" id="kb-L8" class="kb-input-compact"></div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 4px;">
+                         <div style="flex: 1;">
+                            <label style="font-weight:bold; color:#666;">组合标题 (自动生成)</label>
+                            <input type="text" id="kb-combo-title" class="kb-input-compact"
+                                   style="width: 100%; font-weight:bold; color: #1890ff; background: #eee; cursor: not-allowed;"
+                                   readonly placeholder="根据 L1-L8 自动计算...">
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="color:#666;">来源文件 (不可修改)</label>
+                            <input type="text" id="kb-source" class="kb-input-compact"
+                                   style="width: 100%; background: #eee; cursor: not-allowed; color:#888;"
+                                   readonly>
+                        </div>
+                    </div>
+
+                    <div class="kb-unique-item" style="flex: 1; min-height: 0;">
+                        <label>片段内容 (Content)</label>
+                        <textarea id="kb-content" class="kb-textarea-compact" style="resize: none; height: 100%;"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer" style="padding: 10px 20px;">
+                <button class="btn btn-sm btn-default" onclick="closeKbModal()">取消</button>
+                <button class="btn btn-sm btn-primary" onclick="saveKnowledge()">保存 (自动生成路径)</button>
+            </div>
+        </div>
+    </div>
+</div>

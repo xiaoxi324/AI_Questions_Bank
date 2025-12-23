@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定春题库管理系统</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/config.css">
+    <link rel="stylesheet" href="css/batch_review.css">
+    <link rel="stylesheet" href="css/library.css">
+    <link rel="stylesheet" href="css/add.css">
+    <link rel="stylesheet" href="css/tool.css">
+    <link rel="stylesheet" href="css/knowledge.css">
+    <link rel="stylesheet" href="css/import_books.css">
+    <link rel="stylesheet" href="css/make_question.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+        .menu {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* 如果菜单太长，允许中间滚动 */
+        }
+        /* 隐藏滚动条但保留功能 */
+        .menu::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-box">
+                <img src="/resource/logo.png" onerror="this.style.display='none'" class="logo-img">
+            </div>
+            <span class="logo-text">定春题库管理系统</span>
+        </div>
+
+        <nav class="menu">
+
+            <div class="menu-group">题库</div>
+
+            <a href="#" class="menu-item active" data-page="library" onclick="loadPage('library')">
+                <img src="/resource/icon_lib.png" class="menu-icon" onerror="this.style.display='none'" alt="题库">
+                <span>题库管理</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="batch_review" onclick="loadPage('batch_review')">
+                <img src="/resource/icon_batch.png" class="menu-icon" onerror="this.style.display='none'" alt="批量">
+                <span>批量审题</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="add" onclick="loadPage('add')">
+                <img src="/resource/icon_add.png" class="menu-icon" onerror="this.style.display='none'" alt="新增">
+                <span>新增题目</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="make_question" onclick="loadPage('make_question')">
+                <img src="/resource/icon_magic.png" class="menu-icon" onerror="this.style.display='none'" alt="编题">
+                <span>智能编题</span>
+            </a>
+
+            <div class="menu-group">工具</div>
+
+            <a href="#" class="menu-item" data-page="tool" onclick="loadPage('tool')">
+                <img src="/resource/icon_search.png" class="menu-icon" onerror="this.style.display='none'" alt="查询">
+                <span>知识查询</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="AI_search" onclick="loadPage('AI_search')">
+                <img src="/resource/icon_compare.png" class="menu-icon" onerror="this.style.display='none'" alt="对比">
+                <span>智能对比</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="config" onclick="loadPage('config')">
+                <img src="/resource/icon_setting.png" class="menu-icon" onerror="this.style.display='none'">
+                <span>配置管理</span>
+            </a>
+
+            <div class="menu-group">知识库</div>
+
+            <a href="#" class="menu-item" data-page="import_books" onclick="loadPage('import_books')">
+                <img src="/resource/icon_import.png" class="menu-icon" onerror="this.style.display='none'" alt="书本">
+                <span>书本管理</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="audit" onclick="loadPage('audit')">
+                <img src="/resource/icon_check.png" class="menu-icon" onerror="this.style.display='none'">
+                <span>知识审核</span>
+            </a>
+
+            <a href="#" class="menu-item" data-page="knowledge" onclick="loadPage('knowledge')">
+                <img src="/resource/icon_db.png" class="menu-icon" onerror="this.style.display='none'" alt="知识库">
+                <span>知识库管理</span>
+            </a>
+
+            <div style="margin-top: auto;"></div>
+
+            <div style="border-top: 1px solid #38414a; margin: 5px 0;"></div>
+
+            <a href="#" class="menu-item" data-page="messages" onclick="loadPage('messages')">
+                <span style="font-size:16px; margin-right:10px;">🔔</span>
+                <span>系统消息</span>
+            </a>
+        </nav>
+
+        <div class="version-info">Version 6.2 (Reorganized)</div>
+    </aside>
+
+    <main class="main-content" id="app-container">
+        <div class="loading-placeholder">正在加载模块...</div>
+    </main>
+
+    <script src="js/core.js"></script>
+    <script src="js/library.js"></script>
+    <script src="js/add.js"></script>
+    <script src="js/tool.js"></script>
+    <script src="js/knowledge.js"></script>
+    <script src="js/audit.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/import_books.js"></script>
+    <script src="js/messages.js"></script>
+    <script src="js/batch_review.js"></script>
+    <script src="js/AI_search.js"></script>
+    <script src="js/make_question.js"></script>
+</body>
+</html>

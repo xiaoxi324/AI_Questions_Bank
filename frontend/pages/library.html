@@ -1,0 +1,151 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <input type="text" id="search-input" class="search-input" placeholder="搜索题目ID或内容..." onkeypress="if(event.key==='Enter') loadQuestionList()">
+            <button class="btn btn-default" onclick="loadQuestionList()">查询</button>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn btn-primary" onclick="loadPage('add')">+ 新增题目</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th width="50">ID</th>
+                    <th width="60">类型</th>
+                    <th>题干 (预览)</th>
+                    <th width="50">答案</th>
+                    <th width="80">来源</th>
+                    <th width="60">定春</th>
+                    <th width="60">Qwen</th>
+                    <th width="60">Kimi</th>
+                    <th width="60">豆包</th>
+                    <th width="120">操作</th>
+                </tr>
+            </thead>
+            <tbody id="question-list-body"></tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <span id="page-info" class="page-info">加载中...</span>
+        <div class="page-btns">
+            <button class="btn btn-sm" onclick="changePage(-1)"> < </button>
+            <button class="btn btn-sm" onclick="changePage(1)"> > </button>
+        </div>
+    </div>
+
+    <div id="common-modal" class="modal hidden">
+        <div class="modal-content">
+
+            <div class="modal-header-bar">
+                <h4>题目详情 (ID: <span id="modal-id">--</span>)</h4>
+                <span class="close-icon" onclick="closeModal()">×</span>
+            </div>
+
+            <div class="modal-scroll-area">
+
+                <div class="question-detail-box">
+                    <div id="modal-case-content"></div>
+
+                    <div id="modal-stem" class="q-stem"></div>
+                    <div id="modal-options" class="q-options"></div>
+                    <div class="q-footer">
+                        <span class="tag-answer">答案：<span id="modal-answer"></span></span>
+                        <div class="q-analysis"><strong>解析：</strong><span id="modal-analysis"></span></div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <div class="ai-tabs-header">
+                        <div class="tab-item active" onclick="switchTab('dingchun')">
+                            <span class="status-dot" id="dot-dingchun"></span> 定春
+                        </div>
+                        <div class="tab-item" onclick="switchTab('qwen')">
+                            <span class="status-dot" id="dot-qwen"></span> Qwen
+                        </div>
+                        <div class="tab-item" onclick="switchTab('kimi')">
+                            <span class="status-dot" id="dot-kimi"></span> Kimi
+                        </div>
+                        <div class="tab-item" onclick="switchTab('doubao')">
+                            <span class="status-dot" id="dot-doubao"></span> 豆包
+                        </div>
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn btn-primary" onclick="startAllReviews()">⚡ 一键全审</button>
+                    </div>
+                </div>
+
+                <div class="modal-bottom">
+
+                    <div id="tab-content-dingchun" class="tab-content active">
+                        <div class="ai-toolbar">
+                            <div class="status-group">
+                                状态：<span id="status-text-dingchun" class="status-text">未执行</span>
+                            </div>
+                            <div class="history-group">
+                                <select id="history-select-dingchun" class="history-select" disabled>
+                                    <option>暂无历史</option>
+                                </select>
+                                <button class="btn btn-xs" onclick="runReviewAgent(currentQId)">🔄 重新执行</button>
+                            </div>
+                        </div>
+                        <div id="md-dingchun" class="markdown-body"></div>
+                        <div class="rag-box hidden" id="rag-box-dingchun">
+                            <div class="rag-title">📚 药典检索依据</div>
+                            <div id="rag-text-dingchun" class="rag-content-full"></div>
+                        </div>
+                    </div>
+
+                    <div id="tab-content-qwen" class="tab-content">
+                        <div class="ai-toolbar">
+                            <div class="status-group">
+                                状态：<span id="status-text-qwen" class="status-text">未执行</span>
+                            </div>
+                            <div class="history-group">
+                                 <select id="history-select-qwen" class="history-select" disabled>
+                                    <option>暂无历史</option>
+                                </select>
+                                <button class="btn btn-xs" onclick="runOtherAi(currentQId, 'qwen')">🔄 重新执行</button>
+                            </div>
+                        </div>
+                        <div id="md-qwen" class="markdown-body"></div>
+                    </div>
+
+                    <div id="tab-content-kimi" class="tab-content">
+                        <div class="ai-toolbar">
+                            <div class="status-group">
+                                状态：<span id="status-text-kimi" class="status-text">未执行</span>
+                            </div>
+                            <div class="history-group">
+                                 <select id="history-select-kimi" class="history-select" disabled>
+                                    <option>暂无历史</option>
+                                </select>
+                                <button class="btn btn-xs" onclick="runOtherAi(currentQId, 'kimi')">🔄 重新执行</button>
+                            </div>
+                        </div>
+                        <div id="md-kimi" class="markdown-body"></div>
+                    </div>
+
+                    <div id="tab-content-doubao" class="tab-content">
+                        <div class="ai-toolbar">
+                            <div class="status-group">
+                                状态：<span id="status-text-doubao" class="status-text">未执行</span>
+                            </div>
+                            <div class="history-group">
+                                 <select id="history-select-doubao" class="history-select" disabled>
+                                    <option>暂无历史</option>
+                                </select>
+                                <button class="btn btn-xs" onclick="runOtherAi(currentQId, 'doubao')">🔄 重新执行</button>
+                            </div>
+                        </div>
+                        <div id="md-doubao" class="markdown-body"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

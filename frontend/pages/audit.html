@@ -1,0 +1,114 @@
+<div class="page-section active" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
+
+    <div class="toolbar" style="flex: 0 0 auto; padding: 10px; background: #fff; border-bottom: 1px solid #eee;">
+        <div class="toolbar-left">
+            <label>选择书本：</label>
+            <select id="audit-book-select" class="form-select" style="width: 220px;" onchange="window.loadBookBatches()">
+                <option value="">加载中...</option>
+            </select>
+
+            <label style="margin-left: 10px;">批次范围：</label>
+            <select id="audit-range-select" class="form-select" style="width: 180px;" onchange="window.jumpToBatch()">
+                <option value="">请先选书...</option>
+            </select>
+
+            <span style="font-size: 12px; color: #888; margin-left: 10px;">
+                (目标库: <span id="audit-collection-label" style="font-weight:bold; color:#1890ff;">--</span>)
+            </span>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn btn-success btn-sm" onclick="window.batchEmbed()">⚡ 批量入库本页</button>
+            <button class="btn btn-primary btn-sm" onclick="window.openAuditModal()">+ 新增片段</button>
+        </div>
+    </div>
+
+    <div class="table-container" style="flex: 1; overflow-y: auto; position: relative;">
+        <table class="data-table" style="table-layout: fixed; width: 100%; border-collapse: collapse;">
+
+            <colgroup>
+                <col style="width: 250px;"> <col style="width: auto;">  <col style="width: 100px;">  <col style="width: 150px;"> </colgroup>
+
+            <thead style="position: sticky; top: 0; background: #f5f5f5; z-index: 10; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                <tr>
+                    <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">
+                        完整来源 / 组合标题
+                    </th>
+                    <th class="kb-col-content" style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">
+                        片段内容
+                    </th>
+                    <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd;">
+                        状态
+                    </th>
+                    <th style="padding: 10px; text-align: center; border-bottom: 2px solid #ddd;">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody id="audit-list-body">
+                </tbody>
+        </table>
+    </div>
+
+    <div class="pagination" style="flex: 0 0 auto; padding: 10px; display: flex; justify-content: center; align-items: center; gap: 20px; background: #fff; border-top: 1px solid #ddd; z-index: 20;">
+        <button class="btn btn-default" onclick="window.changeBatch(-1)" style="min-width: 100px; cursor: pointer;">
+            &lt; 上一批次
+        </button>
+
+        <span id="audit-batch-info" style="font-size: 13px; font-weight: bold; color: #555;">
+            请先选择书本
+        </span>
+
+        <button class="btn btn-default" onclick="window.changeBatch(1)" style="min-width: 100px; cursor: pointer;">
+            下一批次 &gt;
+        </button>
+    </div>
+
+    <div id="audit-modal" class="modal hidden">
+        <div class="modal-content" style="width: 90%; max-width: 1200px; height: 90vh; display: flex; flex-direction: column;">
+            <div class="modal-header-bar" style="padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                <h4 id="audit-modal-title" style="margin: 0; font-size: 16px; font-weight: 600;">编辑知识片段</h4>
+                <span class="close-icon" onclick="window.closeAuditModal()" style="cursor: pointer; font-size: 20px;">×</span>
+            </div>
+
+            <div class="modal-scroll-area-white" style="flex: 1; overflow-y: auto; padding: 20px;">
+                <form id="audit-form" style="display: flex; flex-direction: column; gap: 15px; height: 100%;">
+                    <input type="hidden" id="audit-id">
+                    <input type="hidden" id="audit-range">
+
+                    <div style="background: #f9f9f9; padding: 15px; border-radius: 6px; border: 1px solid #eee;">
+                        <label style="font-weight: bold; font-size: 12px; color: #555; display: block; margin-bottom: 10px;">层级结构 (L1 - L8)</label>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                            <div><label style="font-size:10px; color:#999;">L1</label><input type="text" id="audit-L1" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L2</label><input type="text" id="audit-L2" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L3</label><input type="text" id="audit-L3" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L4</label><input type="text" id="audit-L4" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L5</label><input type="text" id="audit-L5" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L6</label><input type="text" id="audit-L6" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L7</label><input type="text" id="audit-L7" class="form-input" style="width:100%;"></div>
+                            <div><label style="font-size:10px; color:#999;">L8</label><input type="text" id="audit-L8" class="form-input" style="width:100%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="font-weight: bold; font-size: 12px; color: #555;">组合标题 (自动生成)</label>
+                        <input type="text" id="audit-combo-title" class="form-input"
+                               style="width: 100%; background-color: #eee; color: #666; cursor: not-allowed; font-weight: bold;"
+                               readonly placeholder="根据 L1-L8 自动生成...">
+                    </div>
+
+                    <div style="flex: 1; display: flex; flex-direction: column; min-height: 200px;">
+                        <label style="font-weight: bold; font-size: 12px; color: #555;">片段内容</label>
+                        <textarea id="audit-content" class="form-textarea"
+                                  style="flex: 1; resize: none; padding: 10px; line-height: 1.6; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer" style="padding: 15px 20px; border-top: 1px solid #eee; background: #fff; text-align: right;">
+                <button class="btn btn-default" onclick="window.closeAuditModal()">取消</button>
+                <button class="btn btn-primary" onclick="window.saveAuditFragment()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

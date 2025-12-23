@@ -1,0 +1,35 @@
+<div class="page-section active">
+    <div class="toolbar">
+        <h3>药典知识库查询 (Top 20)</h3>
+    </div>
+
+        <div class="search-hero">
+            <div class="search-box-lg" style="display: flex; gap: 10px; padding: 5px;">
+                <input type="text"
+                       id="tool-filter"
+                       style="width: 30%; border-right: 1px solid #eee;"
+                       placeholder="级标/标题过滤 (选填)"
+                       onkeydown="if(event.key==='Enter') runToolSearch()">
+
+                <input type="text"
+                       id="tool-query"
+                       style="flex: 1;"
+                       placeholder="检索内容 (例如: '不良反应')"
+                       onkeydown="if(event.key==='Enter') runToolSearch()">
+
+                <button class="btn btn-primary btn-lg" onclick="runToolSearch()">🔍 搜索</button>
+            </div>
+            <div class="search-tips">
+                热门搜索：
+                <span onclick="fillSearch('', '奥氮平 禁忌')">奥氮平 禁忌</span>
+                <span onclick="fillSearch('内科', '感冒')">内科 + 感冒</span>
+                <span onclick="fillSearch('中药', '毒性')">中药 + 毒性</span>
+            </div>
+        </div>
+
+    <div class="result-area-grid">
+        <div id="tool-results" class="rag-grid">
+            <div class="empty-state">请在上方输入关键词进行检索</div>
+        </div>
+    </div>
+</div>

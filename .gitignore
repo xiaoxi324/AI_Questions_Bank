@@ -1,0 +1,24 @@
+# === 屏蔽开发工具配置 ===
+.idea/
+__pycache__/
+*.py[cod]
+
+# === 屏蔽虚拟环境 (那一堆库) ===
+.venv/
+venv/
+env/
+
+# === 屏蔽敏感文件 ===
+natapp/
+keys.txt
+secrets.json
+
+# === 屏蔽备份与临时垃圾 ===
+Z_bak/
+*.log
+*.tmp
+
+# === 屏蔽本地数据 (视情况而定) ===
+# 如果你的 backend/books/ 下面有书本，也不要传
+*.pdf
+*.docx

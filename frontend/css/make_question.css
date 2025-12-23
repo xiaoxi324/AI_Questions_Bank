@@ -1,0 +1,198 @@
+/* make_question.css */
+
+.config-container {
+    padding: 15px;
+    height: calc(100vh - 80px); /* 铺满屏幕 */
+    box-sizing: border-box;
+}
+
+/* 2x2 网格布局 */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr; /* 左侧固定400px，右侧自适应 */
+    grid-template-rows: 1fr 1fr;      /* 上下各占50% */
+    gap: 15px;
+    height: 100%;
+}
+
+/* 卡片通用样式 */
+.card-box {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column; /* 垂直排列 Header, Content, Footer */
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    flex-shrink: 0; /* 头部不压缩 */
+}
+
+/* 内容区域：占据剩余空间并滚动 */
+.card-content {
+    padding: 15px;
+    flex: 1;
+    overflow-y: auto; /* 关键：内容滚动 */
+    position: relative;
+}
+
+/* 底部固定栏样式 */
+.card-footer-fixed {
+    padding: 10px 15px;
+    background: #fff;
+    border-top: 1px solid #eee;
+    flex-shrink: 0; /* 底部不压缩 */
+    z-index: 10;
+}
+
+.scroll-box {
+    overflow-y: auto;
+}
+
+/* === 区域特定样式 === */
+
+/* 输入表单 */
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.form-group.row {
+    display: flex;
+    gap: 10px;
+}
+.form-group.row .col { flex: 1; }
+
+.radio-group label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* 全宽按钮 */
+.full-width {
+    width: 100%;
+}
+
+.btn-start {
+    background: #1890ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+.btn-start:hover { background: #40a9ff; }
+.btn-start:disabled { background: #ccc; cursor: not-allowed; }
+
+/* 日志与片段 */
+#agent_log_area, #snippet_area {
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.log-line { margin-bottom: 4px; }
+.log-thought { color: #0052d9; }
+.log-tool { color: #d46b08; }
+.log-error { color: red; }
+
+.snip-block {
+    background: #fafafa;
+    border-left: 3px solid #52c41a;
+    padding: 8px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    color: #555;
+    border-bottom: 1px solid #eee;
+}
+
+/* 最终结果 */
+.qa-item { margin-bottom: 10px; }
+.qa-label { font-weight: bold; font-size: 12px; color: #888; margin-bottom: 2px; }
+.qa-val { font-size: 13px; line-height: 1.5; white-space: pre-wrap; color: #333; }
+.qa-options { list-style: none; padding: 0; margin: 0; }
+.qa-options li { padding: 4px 0; font-size: 13px; }
+
+/* 操作栏按钮 */
+.action-bar {
+    text-align: right; /* 按钮靠右 */
+}
+.btn-sub {
+    padding: 6px 15px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 13px;
+}
+.btn-save { background: #1890ff; color: #fff; border-color: #1890ff; }
+.btn-save:hover { background: #40a9ff; }
+.btn-retry { color: #666; }
+.btn-retry:hover { background: #f5f5f5; }
+
+
+/* 确保容器铺满 */
+.config-container {
+    padding: 15px;
+    height: calc(100vh - 70px); /* 减去顶部导航高度 */
+    overflow: hidden;
+}
+
+.grid-layout {
+    display: grid;
+    /* 左侧 400px，右侧自适应 */
+    grid-template-columns: 400px 1fr;
+    /* 上下各 50% */
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
+    height: 100%;
+}
+
+/* 指定区域 */
+.area-input { grid-row: 1 / 2; grid-column: 1 / 2; }
+.area-log   { grid-row: 1 / 2; grid-column: 2 / 3; }
+.area-result{ grid-row: 2 / 3; grid-column: 1 / 2; }
+.area-snippet{grid-row: 2 / 3; grid-column: 2 / 3; }
+
+/* 确保所有卡片都有 flex 布局和 overflow */
+.card-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.card-content {
+    flex: 1;
+    overflow-y: auto; /* 内部滚动 */
+}

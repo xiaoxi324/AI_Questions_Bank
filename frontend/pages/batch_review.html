@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>批量审题控制台</title>
+    <!-- 引入通用样式 -->
+    <link rel="stylesheet" href="common.css">
+    <!-- 引入批量审题专属样式 -->
+    <link rel="stylesheet" href="batch_review.css">
+</head>
+<body>
+    <div class="page-section active">
+        <!-- 工具栏 -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <span style="font-weight:bold; font-size:18px; color:#333;">批量审题控制台</span>
+            </div>
+        </div>
+
+        <!-- 2/3+1/3核心布局容器 -->
+        <div class="control-container">
+            <!-- 左侧：审题设置卡片 -->
+            <div class="card">
+                <div class="card-header">审题设置</div>
+                <div class="card-body setting-body">
+                    <!-- 审题设置内容区（3/4） -->
+                    <div class="setting-area">
+                        <!-- 题号选择 -->
+                        <div id="range-control">
+                            <label for="batch-start-id">开始题号</label>
+                            <input type="number" id="batch-start-id" value="1" placeholder="例如: 1">
+                            <span style="color:#bbb;">—</span>
+                            <label for="batch-end-id">结束题号</label>
+                            <input type="number" id="batch-end-id" value="20" placeholder="例如: 100">
+                        </div>
+                        <!-- AI选择 -->
+                        <div id="ai-control">
+                            <span>审题 AI :</span>
+                            <label>
+                                <input type="checkbox" id="check-dingchun" checked>
+                                <span>定春 (L)</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="check-qwen">
+                                <span>Qwen</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="check-kimi">
+                                <span>Kimi</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="check-doubao">
+                                <span>豆包</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 按钮区（1/4） -->
+                    <div class="btn-area">
+                        <button id="btn-batch-toggle" onclick="toggleBatchTask()">
+                            <span>🚀</span> 开始批量审题
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：审题进度卡片 -->
+            <div class="card">
+                <div class="card-header">
+                    <span>当前审题进度</span>
+                    <div id="ai-progress-details">定春(L): 0/18 (Next ID: 1)</div>
+                </div>
+                <div class="card-body">
+                    <div class="progress-body">
+                        <div id="task-status-msg">任务已暂停</div>
+                        <span id="batch-progress">0/18</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 表格区域 -->
+        <div class="table-container">
+            <div class="table-content">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width:60px;">ID</th>
+                            <th>题干预览</th>
+                            <th style="width:90px;">定春</th>
+                            <th style="width:90px;">Qwen</th>
+                            <th style="width:90px;">Kimi</th>
+                            <th style="width:90px;">豆包</th>
+                        </tr>
+                    </thead>
+                    <tbody id="batch-list-body">
+                        <!-- 空表格提示 -->
+                        <tr>
+                            <td colspan="6" class="empty-table-tip">暂无审题数据，请点击「开始批量审题」按钮执行任务</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 翻页控件 -->
+            <div id="batch-pagination">
+                <div>
+                    <span>当前显示 <span id="batch-current-count">0</span> 条，总计 <span id="batch-total-count">0</span> 条</span>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <button id="batch-prev-page" onclick="changeBatchPage('prev')" disabled class="btn">上一页</button>
+                        <span>第 <span id="batch-current-page">1</span> / <span id="batch-total-page">0</span> 页</span>
+                        <button id="batch-next-page" onclick="changeBatchPage('next')" disabled class="btn">下一页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 简单的交互脚本（可选） -->
+    <script>
+        // 批量审题按钮点击事件
+        function toggleBatchTask() {
+            const btn = document.getElementById('btn-batch-toggle');
+            const statusMsg = document.getElementById('task-status-msg');
+            if (btn.innerText.includes('开始')) {
+                btn.innerHTML = '<span>⏹</span> 停止批量审题';
+                statusMsg.textContent = '任务执行中...';
+                statusMsg.style.color = '#1890ff';
+            } else {
+                btn.innerHTML = '<span>🚀</span> 开始批量审题';
+                statusMsg.textContent = '任务已暂停';
+                statusMsg.style.color = '#666';
+            }
+        }
+
+        // 翻页功能（占位）
+        function changeBatchPage(type) {
+            // 实际项目中补充翻页逻辑
+            alert('暂无数据，无法翻页');
+        }
+    </script>
+</body>
+</html>
